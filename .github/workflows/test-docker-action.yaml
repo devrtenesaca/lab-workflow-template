@@ -1,0 +1,31 @@
+name: Test Docker Action
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      docker-file:
+        description: 'Escribe la ruta del Dockerfile (ej: Dockerfile o subcarpeta/Dockerfile)'
+        required: true
+        default: 'Dockerfile'
+
+jobs:
+  test-docker-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🛡️ Run Docker Security Check
+        id: security-check
+        uses: ./.github/actions/security-check
+        with:
+          # Aquí conectamos el input del botón manual con la acción
+          dockerfile-path: ${{ github.event.inputs.docker-file || 'Dockerfile' }}
+      
+      - name: 📊 Print Result
+        # Este paso solo se ejecuta si el anterior NO falla (exit 0)
+        run: |
+          echo "El análisis de seguridad ha terminado."
+          echo "Estado final: ${{ steps.security-check.outputs.status }}"

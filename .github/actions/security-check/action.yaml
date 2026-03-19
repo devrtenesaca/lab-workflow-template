@@ -1,0 +1,16 @@
+name: Docker Security Check
+description: 'review the docker container to determine if its use a best practice'
+
+inputs:
+  dockerfile-path:
+    description: 'Path of dockerfile'
+    required: true
+    default: 'Dockerfile'
+
+outputs:
+  status:
+    description: 'results of analysis'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
