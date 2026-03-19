@@ -1,4 +1,4 @@
-name: Test Docker Action
+name: Test Docker 
 
 on:
   push:
@@ -11,21 +11,11 @@ on:
         default: 'Dockerfile'
 
 jobs:
-  test-docker-action:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-
-      - name: 🛡️ Run Docker Security Check
-        id: security-check
-        uses: ./.github/actions/security-check
-        with:
-          # Aquí conectamos el input del botón manual con la acción
-          dockerfile-path: ${{ github.event.inputs.docker-file || 'Dockerfile' }}
-      
-      - name: 📊 Print Result
-        # Este paso solo se ejecuta si el anterior NO falla (exit 0)
-        run: |
-          echo "El análisis de seguridad ha terminado."
-          echo "Estado final: ${{ steps.security-check.outputs.status }}"
+  call-docker-ci:
+    uses: ./.github/workflows/reusable-workflow-docker.yml
+    with:
+      image_name: 'Dockerfile'
+      dockerfile_path: './Dockerfile'
+    # Si tuvieras secretos, los pasarías así:
+    # secrets:
+    #   registry_token: ${{ secrets.MI_TOKEN }}

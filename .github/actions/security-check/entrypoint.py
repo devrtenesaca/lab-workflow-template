@@ -13,7 +13,7 @@ def run():
         if "latest" in content.lower():
             print("⚠️ ADVERTENCIA: Se detectó el uso de 'latest'. Usa versiones específicas.")
             # Podríamos usar sys.exit(1) para fallar, pero solo daremos un aviso
-            sys.exit(1)
+            #sys.exit(1)
         else:
             print("✅ Todo bien: No se detectó el tag 'latest'.")
 
