@@ -12,7 +12,7 @@ on:
     # we define de secrets that we want to use in the reusable workflow
     secrets:
       registry-token:
-        required: true
+        required: false
 jobs:
   build-and-check:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
         uses: ./.github/actions/security-check
         with:
           dockerfile-path: ${{ inputs.dockerfile-path }}
-          
+          git 
       - name: Build the Docker image
         run: |
           docker build -t ${{ inputs.image-name }} -f ${{ inputs.dockerfile-path }} .
