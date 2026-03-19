@@ -26,7 +26,6 @@ jobs:
         uses: ./.github/actions/security-check
         with:
           dockerfile-path: ${{ inputs.dockerfile-path }}
-          git 
       - name: Build the Docker image
         run: |
           docker build -t ${{ inputs.image-name }} -f ${{ inputs.dockerfile-path }} .
