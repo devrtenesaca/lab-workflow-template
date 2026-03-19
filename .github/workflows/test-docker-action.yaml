@@ -14,8 +14,8 @@ jobs:
   call-docker-ci:
     uses: ./.github/workflows/reusable-workflow-docker.yaml
     with:
-      image_name: 'Dockerfile'
-      dockerfile_path: './Dockerfile'
+      image-name: 'Dockerfile'
+      dockerfile-path: './Dockerfile'
     # Si tuvieras secretos, los pasarías así:
     # secrets:
     #   registry_token: ${{ secrets.MI_TOKEN }}
